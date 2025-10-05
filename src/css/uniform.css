@@ -1,0 +1,201 @@
+/* ===============================
+   🎬 MOVIE XPLORER HEADER STYLES
+   =============================== */
+
+/* Root Colors */
+:root {
+  --color-bg-primary: #0B132B;    /* Deep Navy (page default) */
+  --color-bg-secondary: #1D1F4A;  /* Indigo (header/nav) */
+  --color-accent: #E50914;        /* Netflix Red */
+  --color-highlight: #FFB703;     /* Golden Amber */
+  --color-text: #F8F9FA;          /* Light Text */
+  --color-dark-mode-bg: #000000;  /* Black for dark mode */
+  --font-primary: 'Montserrat', sans-serif;
+}
+
+/* Header */
+header {
+  background-color: var(--color-bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s;
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 45px;
+  height: 45px;
+}
+
+.logo h1 {
+  color: var(--color-accent);
+  font-family: var(--font-primary);
+  font-size: 24px;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* Navigation Menu */
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--color-highlight);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--color-accent);
+}
+
+/* Header Controls (Dark Mode + Hamburger) */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  background: none;
+  border: 2px solid var(--color-highlight);
+  color: var(--color-highlight);
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dark-mode-toggle:hover {
+  background-color: var(--color-highlight);
+  color: var(--color-bg-secondary);
+}
+
+/* Hamburger Menu (Mobile) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* -------------------------------
+   📱 MOBILE VIEW STYLES
+   ------------------------------- */
+@media (max-width: 768px) {
+  nav {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background-color: var(--color-bg-secondary);
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0;
+    display: none;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* -------------------------------
+   🌙 DARK MODE
+   ------------------------------- */
+body.dark-mode header {
+  background-color: var(--color-accent);
+}
+
+body.dark-mode nav a {
+  color: var(--color-text);
+}
+
+body.dark-mode .dark-mode-toggle {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+  background-color: var(--color-text);
+  color: var(--color-accent);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text);
+  transition: background-color 0.4s, color 0.4s;
+}
+
+/* -------------------------------
+   🌙 DARK MODE (black background)
+   ------------------------------- */
+body.dark-mode {
+  background-color: var(--color-dark-mode-bg);
+  color: var(--color-text); /* keep text light on black */
+}
+
+/* Keep header/nav/controls readable in dark mode while retaining accents */
+body.dark-mode header {
+  background-color: var(--color-accent);
+}
+
+body.dark-mode nav a {
+  color: var(--color-text);
+}
+
+body.dark-mode .dark-mode-toggle {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+  background-color: var(--color-text);
+  color: var(--color-accent);
+}
+
+body.dark-mode .movie-card {
+  background-color: #111111; /* subtle card contrast on black */
+  color: var(--color-text);
+}
+
+body.dark-mode footer {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background-color: #1D1F4A;
+  text-align: center;
+  padding: 15px 0;
+  color: #ADB5BD;
+  font-size: 14px;
+  margin-top: 40px;
+}
