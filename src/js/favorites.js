@@ -3,18 +3,16 @@ import {
     setActiveNavLink,
     initializeMobileMenu,
 } from "./modules/Utils.mjs";
-import FavoritesManager from "./modules/Favorites.mjs";
+import Favorites from "./modules/Favorites.mjs";
 
-// Initialize utilities
-loadHeaderFooter(() => {
-    setActiveNavLink();
-});
+document.addEventListener("DOMContentLoaded", async () => {
+    // Load header & footer before initializing favorites
+    await loadHeaderFooter(() => {
+        setActiveNavLink();
+        initializeMobileMenu();
+    });
 
-// Initialize favorites functionality
-document.addEventListener("DOMContentLoaded", function () {
-    new FavoritesManager();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    initializeMobileMenu();
+    // Initialize favorites page
+    const favoritesPage = new Favorites();
+    favoritesPage.init();
 });
