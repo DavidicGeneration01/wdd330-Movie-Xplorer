@@ -1,45 +1,40 @@
-const key = import.meta.env.VITE_API_KEY;
-const baseURL = import.meta.env.VITE_BASE_URL;
+const API_KEY =
+  import.meta?.env?.VITE_API_KEY ||
+  "602e96a6dc6deb30409a56c78bd975b7"; // fallback key if .env not loaded
 
-// console.log("Api Key:", import.meta.env.VITE_API_KEY);
-// console.log("Base URL:", import.meta.env.VITE_BASE_URL);
+const BASE_URL = "https://api.themoviedb.org/3";
 
 export default class ApiService {
-  
-    async discoverByGenres(genreIds = [], page = 1) {
-        const withGenres = genreIds.join(",");
-        const res = await fetch(
-            `${baseURL}/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&page=${page}&with_genres=${withGenres}`,
-        );
-        return await res.json();
-    }
+  async getPopularMovies(page = 1) {
+    return this.fetchData(
+      `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`
+    );
+  }
 
-    async fetchGenres() {
-        const res = await fetch(
-            `${baseURL}/genre/movie/list?api_key=${key}&language=en-US`,
-        );
-        const data = await res.json();
-        return data.genres; // [{id, name}, …]
-    }
+  async searchMovies(query, page = 1) {
+    return this.fetchData(
+      `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(
+        query
+      )}&page=${page}`
+    );
+  }
 
-    async searchMovies(query, page = 1) {
-        const res = await fetch(
-            `${baseURL}/search/movie?api_key=${key}&language=en-US&query=${encodeURIComponent(query)}&page=${page}&include_adult=false`,
-        );
-        return await res.json();
-    }
+  async fetchGenres() {
+    return this.fetchData(
+      `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    ).then((data) => data.genres);
+  }
 
-    async getMovieDetails(movieId) {
-        const res = await fetch(
-            `${baseURL}/movie/${movieId}?api_key=${key}&language=en-US`,
-        );
-        return await res.json();
+  async fetchData(url) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("API fetch error:", error);
+      throw error;
     }
-
-    async getPopularMovies(page = 1) {
-        const res = await fetch(
-            `${baseURL}/movie/popular?api_key=${key}&language=en-US&page=${page}`,
-        );
-        return await res.json();
-    }
+  }
 }
