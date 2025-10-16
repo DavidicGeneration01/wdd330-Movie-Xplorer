@@ -85,7 +85,7 @@ export default class HomeFeatures {
             const movies = response.results;
 
             // Randomly select 3 movies from the popular movies
-            const featuredMovies = this.getRandomMovies(movies, 3);
+            const featuredMovies = this.getRandomMovies(movies, 6);
 
             this.renderFeaturedMovies(featuredMovies);
         } catch (error) {
