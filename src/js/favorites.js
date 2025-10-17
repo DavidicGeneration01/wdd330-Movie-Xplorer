@@ -6,13 +6,17 @@ import {
 import Favorites from "./modules/Favorites.mjs";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // Load header & footer before initializing favorites
+    // Wait until header and footer are loaded
     await loadHeaderFooter(() => {
         setActiveNavLink();
         initializeMobileMenu();
     });
 
-    // Initialize favorites page
+    // Now initialize favorites AFTER DOM update
     const favoritesPage = new Favorites();
-    favoritesPage.init();
+
+    // Wait a small delay to ensure dynamic content inserted
+    setTimeout(() => {
+        favoritesPage.init();
+    }, 100);
 });
