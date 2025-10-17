@@ -4,9 +4,12 @@
 
 /* 1️⃣  Movie Card 3D Flip on Hover */
 .movie-card {
-    perspective: 1000px;
-    transform-style: preserve-3d;
-    transition: transform 0.8s ease, box-shadow 0.4s ease;
+    -webkit-perspective: 1000px;
+            perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-transition: transform 0.8s ease, box-shadow 0.4s ease;
+            transition: transform 0.8s ease, box-shadow 0.4s ease;
 }
 
 .movie-card:hover {
@@ -46,6 +49,14 @@
 
 /* 3️⃣  Hero Title Gradient Glow Animation */
 .hero h1 {
+    background-image: -webkit-linear-gradient(
+        90deg,
+        #8b5cf6,
+        #fbbf24,
+        #f97316,
+        #3b82f6,
+        #8b5cf6
+    );
     background-image: linear-gradient(
         90deg,
         #8b5cf6,
